@@ -7,6 +7,8 @@ import Books from './pages/Books/Books'
 import Students from './pages/Students/Students'
 import Loans from './pages/Loans/Loans'
 import Register from './pages/Register/Register'
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
+import ResetPassword from './pages/ResetPassword/ResetPassword'
 
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
                 <Route
                     path="/"
                     element={
