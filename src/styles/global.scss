@@ -1,0 +1,49 @@
+@use './tokens' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: $font-sans;
+  font-size: $font-size-base;
+  color: $color-text-primary;
+  background-color: $color-bg-tertiary;
+  line-height: $line-height-normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  color: $color-text-primary;
+}
+
+h1 { font-size: $font-size-3xl; }
+h2 { font-size: $font-size-2xl; }
+h3 { font-size: $font-size-xl; }
+h4 { font-size: $font-size-lg; }
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+button {
+  cursor: pointer;
+  font-family: $font-sans;
+}
+
+input, select, textarea {
+  font-family: $font-sans;
+  font-size: $font-size-base;
+}
