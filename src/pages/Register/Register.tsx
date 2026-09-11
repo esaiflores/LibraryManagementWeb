@@ -11,6 +11,8 @@ export default function Register() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
+    console.log('API URL:', import.meta.env.VITE_API_URL)
+    console.log('Submitting registration...')
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
