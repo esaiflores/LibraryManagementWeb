@@ -268,7 +268,8 @@
 .searchResults {
   border: 1px solid $color-border-light;
   border-radius: $border-radius-md;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: 280px;
   margin-top: $space-1;
 }
 
@@ -309,9 +310,9 @@
   gap: 2px;
   flex: 1;
 }
-
 .searchResult {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: $space-3;
   padding: $space-3 $space-4;
@@ -322,6 +323,7 @@
   &:last-child { border-bottom: none; }
   &:hover { background: $color-primary-light; }
 }
+
 
 .bookTitleCell {
   display: flex;

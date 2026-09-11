@@ -4,6 +4,7 @@ import { bookService } from '../../services/bookService'
 import { searchBooks } from '../../services/bookSearchService'
 import type { OpenLibraryBook } from '../../services/bookSearchService'
 import styles from './Books.module.scss'
+import { useDebouncedCallback } from 'use-debounce'
 
 const emptyBook: Book = {
     title: '',
@@ -69,10 +70,10 @@ export default function Books() {
         setSearchResults([])
     }
 
-    const handleBookSearch = async (query: string) => {
-        setBookQuery(query)
+    const handleBookSearch = useDebouncedCallback(async (query: string) => {
         if (query.length < 3) {
             setSearchResults([])
+            setSearching(false)
             return
         }
         setSearching(true)
@@ -84,7 +85,7 @@ export default function Books() {
         } finally {
             setSearching(false)
         }
-    }
+    }, 500)
 
     const selectBook = (book: OpenLibraryBook) => {
         setForm({
@@ -209,7 +210,10 @@ export default function Books() {
                                     <input
                                         type="text"
                                         value={bookQuery}
-                                        onChange={e => handleBookSearch(e.target.value)}
+                                        onChange={e => {
+                                            setBookQuery(e.target.value)
+                                            handleBookSearch(e.target.value)
+                                        }}
                                         placeholder="Type a title to search Open Library..."
                                     />
                                     {searching && <span className={styles.searching}>Searching...</span>}
