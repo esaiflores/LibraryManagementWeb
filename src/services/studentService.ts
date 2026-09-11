@@ -1,5 +1,5 @@
 import api from './api'
-import { Student } from '../types'
+import type { Student } from '../types'
 
 export const studentService = {
     getAll: () => api.get<Student[]>('/api/students'),

@@ -1,5 +1,5 @@
 import api from './api'
-import { Loan } from '../types'
+import type { Loan } from '../types'
 
 export const loanService = {
     getAll: () => api.get<Loan[]>('/api/loans'),

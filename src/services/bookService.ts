@@ -1,5 +1,5 @@
 import api from './api'
-import { Book } from '../types'
+import type { Book } from '../types'
 
 export const bookService = {
     getAll: () => api.get<Book[]>('/api/books'),
