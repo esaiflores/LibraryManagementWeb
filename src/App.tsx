@@ -14,6 +14,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
                 <Route
                     path="/"
                     element={
@@ -27,7 +28,6 @@ function App() {
                     <Route path="books" element={<Books />} />
                     <Route path="loans" element={<Loans />} />
                     <Route path="students" element={<Students />} />
-                    <Route path="/register" element={<Register />} />
                 </Route>
             </Routes>
         </BrowserRouter>
