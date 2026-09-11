@@ -15,6 +15,9 @@ export default function Register() {
     console.log('Submitting registration...')
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+
+        console.log('API URL:', import.meta.env.VITE_API_URL)
+        console.log('Submitting registration...')
         setError('')
 
         if (password !== confirm) {
