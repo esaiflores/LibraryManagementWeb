@@ -1,0 +1,223 @@
+@use '../../styles/tokens' as *;
+
+.page { max-width: 1200px; }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $space-6;
+}
+
+.title { font-size: $font-size-2xl; }
+
+.addButton {
+  height: 40px;
+  padding: 0 $space-5;
+  background: $color-primary;
+  color: $color-white;
+  border: none;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  transition: background 0.15s;
+  &:hover { background: $color-primary-dark; }
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid $color-border-light;
+  margin-bottom: $space-5;
+}
+
+.tab {
+  padding: $space-3 $space-5;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover { color: $color-text-primary; }
+
+  &.active {
+    color: $color-primary;
+    border-bottom-color: $color-primary;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.loading, .empty {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  padding: $space-8;
+  text-align: center;
+}
+
+.table {
+  background: $color-white;
+  border-radius: $border-radius-lg;
+  border: 1px solid $color-border-light;
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr;
+  padding: $space-3 $space-5;
+  background: $color-bg-secondary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr;
+  padding: $space-4 $space-5;
+  align-items: center;
+  border-top: 1px solid $color-border-light;
+  font-size: $font-size-sm;
+  &:hover { background: $color-bg-tertiary; }
+}
+
+.bookTitle {
+  font-weight: $font-weight-medium;
+}
+
+.date {
+  color: $color-text-secondary;
+  font-size: $font-size-xs;
+
+  &.overdue {
+    color: $color-danger;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.badge {
+  font-size: $font-size-xs;
+  padding: $space-1 $space-2;
+  border-radius: $border-radius-sm;
+  font-weight: $font-weight-medium;
+
+  &.active {
+    background: $color-success-light;
+    color: $color-success;
+  }
+
+  &.overdue {
+    background: $color-danger-light;
+    color: $color-danger;
+  }
+
+  &.returned {
+    background: $color-bg-secondary;
+    color: $color-text-secondary;
+  }
+}
+
+.returnBtn {
+  height: 28px;
+  padding: 0 $space-3;
+  background: $color-success-light;
+  color: $color-success;
+  border: 1px solid $color-success-light;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  transition: all 0.15s;
+
+  &:hover {
+    background: $color-success;
+    color: $color-white;
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: $space-4;
+}
+
+.modal {
+  background: $color-white;
+  border-radius: $border-radius-xl;
+  padding: $space-8;
+  width: 100%;
+  max-width: 440px;
+}
+
+.modalTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $space-6;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+  }
+
+  select {
+    padding: $space-3 $space-4;
+    border: 1px solid $color-border-light;
+    border-radius: $border-radius-md;
+    font-size: $font-size-sm;
+    outline: none;
+    background: $color-white;
+    &:focus { border-color: $color-primary; }
+  }
+}
+
+.modalActions {
+  display: flex;
+  gap: $space-3;
+  justify-content: flex-end;
+  margin-top: $space-2;
+}
+
+.cancelBtn {
+  height: 40px;
+  padding: 0 $space-5;
+  background: $color-white;
+  color: $color-text-secondary;
+  border: 1px solid $color-border-light;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+  &:hover { background: $color-bg-secondary; }
+}
+
+.submitBtn {
+  height: 40px;
+  padding: 0 $space-5;
+  background: $color-primary;
+  color: $color-white;
+  border: none;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  &:hover { background: $color-primary-dark; }
+}
