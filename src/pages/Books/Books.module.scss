@@ -259,3 +259,80 @@
 
   &:hover { background: $color-primary-dark; }
 }
+
+.searching {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.searchResults {
+  border: 1px solid $color-border-light;
+  border-radius: $border-radius-md;
+  overflow: hidden;
+  margin-top: $space-1;
+}
+
+.searchResult {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: $space-3 $space-4;
+  cursor: pointer;
+  border-bottom: 1px solid $color-border-light;
+  transition: background 0.1s;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $color-primary-light; }
+}
+
+.resultTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.resultAuthor {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+}
+.resultCover {
+  width: 32px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.resultInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.searchResult {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  cursor: pointer;
+  border-bottom: 1px solid $color-border-light;
+  transition: background 0.1s;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $color-primary-light; }
+}
+
+.bookTitleCell {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.coverThumb {
+  width: 28px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+}

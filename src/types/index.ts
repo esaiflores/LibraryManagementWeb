@@ -8,6 +8,7 @@ export interface Book {
     availableCopies?: number
     notes?: string
     addedDate?: string
+    coverUrl?: string
 }
 
 export interface Student {

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import type { Book } from '../../types'
 import { bookService } from '../../services/bookService'
+import { searchBooks } from '../../services/bookSearchService'
+import type { OpenLibraryBook } from '../../services/bookSearchService'
 import styles from './Books.module.scss'
 
 const emptyBook: Book = {
@@ -22,10 +24,10 @@ export default function Books() {
     const [form, setForm] = useState<Book>(emptyBook)
     const [search, setSearch] = useState('')
     const [filterGenre, setFilterGenre] = useState('')
+    const [searchResults, setSearchResults] = useState<OpenLibraryBook[]>([])
+    const [bookQuery, setBookQuery] = useState('')
+    const [searching, setSearching] = useState(false)
 
-    useEffect(() => {
-        fetchBooks()
-    }, [])
 
     const fetchBooks = async () => {
         try {
@@ -38,15 +40,24 @@ export default function Books() {
         }
     }
 
+    useEffect(() => {
+        fetchBooks()
+    }, [])
+
+
     const openAdd = () => {
         setEditing(null)
         setForm(emptyBook)
+        setBookQuery('')
+        setSearchResults([])
         setShowModal(true)
     }
 
     const openEdit = (book: Book) => {
         setEditing(book)
         setForm(book)
+        setBookQuery('')
+        setSearchResults([])
         setShowModal(true)
     }
 
@@ -54,6 +65,38 @@ export default function Books() {
         setShowModal(false)
         setEditing(null)
         setForm(emptyBook)
+        setBookQuery('')
+        setSearchResults([])
+    }
+
+    const handleBookSearch = async (query: string) => {
+        setBookQuery(query)
+        if (query.length < 3) {
+            setSearchResults([])
+            return
+        }
+        setSearching(true)
+        try {
+            const results = await searchBooks(query)
+            setSearchResults(results)
+        } catch (err) {
+            console.error(err)
+        } finally {
+            setSearching(false)
+        }
+    }
+
+    const selectBook = (book: OpenLibraryBook) => {
+        setForm({
+            ...form,
+            title: book.title,
+            author: book.author,
+            isbn: book.isbn,
+            genre: book.genre,
+            coverUrl: book.coverUrl || '',
+        })
+        setBookQuery('')
+        setSearchResults([])
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -159,6 +202,43 @@ export default function Books() {
                             {editing ? 'Edit book' : 'Add a new book'}
                         </h3>
                         <form onSubmit={handleSubmit} className={styles.form}>
+
+                            {!editing && (
+                                <div className={styles.field}>
+                                    <label>Search for a book</label>
+                                    <input
+                                        type="text"
+                                        value={bookQuery}
+                                        onChange={e => handleBookSearch(e.target.value)}
+                                        placeholder="Type a title to search Open Library..."
+                                    />
+                                    {searching && <span className={styles.searching}>Searching...</span>}
+                                    {searchResults.length > 0 && (
+                                        <div className={styles.searchResults}>
+                                            {searchResults.map((book, i) => (
+                                                <div
+                                                    key={i}
+                                                    className={styles.searchResult}
+                                                    onClick={() => selectBook(book)}
+                                                >
+                                                    {book.coverUrl && (
+                                                        <img
+                                                            src={book.coverUrl}
+                                                            alt={book.title}
+                                                            className={styles.resultCover}
+                                                        />
+                                                    )}
+                                                    <div className={styles.resultInfo}>
+                                                        <span className={styles.resultTitle}>{book.title}</span>
+                                                        <span className={styles.resultAuthor}>{book.author}</span>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
                             <div className={styles.formRow}>
                                 <div className={styles.field}>
                                     <label>Title *</label>
@@ -179,6 +259,7 @@ export default function Books() {
                                     />
                                 </div>
                             </div>
+
                             <div className={styles.formRow}>
                                 <div className={styles.field}>
                                     <label>Genre</label>
@@ -200,6 +281,7 @@ export default function Books() {
                                     />
                                 </div>
                             </div>
+
                             <div className={styles.field}>
                                 <label>ISBN</label>
                                 <input
@@ -208,6 +290,7 @@ export default function Books() {
                                     placeholder="978-..."
                                 />
                             </div>
+
                             <div className={styles.field}>
                                 <label>Notes</label>
                                 <textarea
@@ -217,6 +300,7 @@ export default function Books() {
                                     rows={3}
                                 />
                             </div>
+
                             <div className={styles.modalActions}>
                                 <button type="button" className={styles.cancelBtn} onClick={closeModal}>Cancel</button>
                                 <button type="submit" className={styles.submitBtn}>
