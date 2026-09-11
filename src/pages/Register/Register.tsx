@@ -6,18 +6,16 @@ import styles from './Register.module.scss'
 export default function Register() {
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirm, setShowConfirm] = useState(false)
 
-    console.log('API URL:', import.meta.env.VITE_API_URL)
-    console.log('Submitting registration...')
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-
-        console.log('API URL:', import.meta.env.VITE_API_URL)
-        console.log('Submitting registration...')
         setError('')
 
         if (password !== confirm) {
@@ -32,12 +30,12 @@ export default function Register() {
 
         setLoading(true)
         try {
-            await authService.register({ username, password })
+            await authService.register({ username, email, password })
             const res = await authService.login({ username, password })
             localStorage.setItem('token', res.data.token)
             navigate('/dashboard')
         } catch {
-            setError('Username already taken or registration failed')
+            setError('Username or email already taken')
         } finally {
             setLoading(false)
         }
@@ -68,27 +66,57 @@ export default function Register() {
                     </div>
 
                     <div className={styles.field}>
-                        <label className={styles.label}>Password</label>
+                        <label className={styles.label}>Email</label>
                         <input
-                            type="password"
+                            type="email"
                             className={styles.input}
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            placeholder="At least 8 characters"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            placeholder="your@email.com"
                             required
                         />
                     </div>
 
                     <div className={styles.field}>
+                        <label className={styles.label}>Password</label>
+                        <div className={styles.passwordWrapper}>
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                className={styles.input}
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                placeholder="At least 8 characters"
+                                required
+                            />
+                            <button
+                                type="button"
+                                className={styles.togglePassword}
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? '🙈' : '👁️'}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className={styles.field}>
                         <label className={styles.label}>Confirm password</label>
-                        <input
-                            type="password"
-                            className={styles.input}
-                            value={confirm}
-                            onChange={e => setConfirm(e.target.value)}
-                            placeholder="Repeat your password"
-                            required
-                        />
+                        <div className={styles.passwordWrapper}>
+                            <input
+                                type={showConfirm ? 'text' : 'password'}
+                                className={styles.input}
+                                value={confirm}
+                                onChange={e => setConfirm(e.target.value)}
+                                placeholder="Repeat your password"
+                                required
+                            />
+                            <button
+                                type="button"
+                                className={styles.togglePassword}
+                                onClick={() => setShowConfirm(!showConfirm)}
+                            >
+                                {showConfirm ? '🙈' : '👁️'}
+                            </button>
+                        </div>
                     </div>
 
                     <button

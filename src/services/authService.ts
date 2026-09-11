@@ -4,8 +4,8 @@ export const authService = {
     login: (credentials: LoginRequest) =>
         api.post<AuthResponse>('/api/auth/login', credentials),
 
-    register: (credentials: LoginRequest) =>
-        api.post('/api/auth/register', credentials),
+    register: (data: { username: string; email: string; password: string }) =>
+        api.post('/api/auth/register', data),
 
     logout: () => {
         localStorage.removeItem('token')

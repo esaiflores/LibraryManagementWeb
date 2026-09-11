@@ -10,6 +10,8 @@ export default function Login() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -53,14 +55,23 @@ export default function Login() {
 
                     <div className={styles.field}>
                         <label className={styles.label}>Password</label>
-                        <input
-                            type="password"
-                            className={styles.input}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter your password"
-                            required
-                        />
+                        <div className={styles.passwordWrapper}>
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                className={styles.input}
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                placeholder="Enter your password"
+                                required
+                            />
+                            <button
+                                type="button"
+                                className={styles.togglePassword}
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? '🙈' : '👁️'}
+                            </button>
+                        </div>
                     </div>
 
                     <button
