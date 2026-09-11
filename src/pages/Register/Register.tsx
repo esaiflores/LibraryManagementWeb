@@ -1,27 +1,38 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { authService } from '../../services/authService'
-import styles from './Login.module.scss'
-import { Link } from 'react-router-dom'
+import styles from './Register.module.scss'
 
-export default function Login() {
+export default function Register() {
     const navigate = useNavigate()
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [confirm, setConfirm] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
-        setLoading(true)
 
+        if (password !== confirm) {
+            setError('Passwords do not match')
+            return
+        }
+
+        if (password.length < 8) {
+            setError('Password must be at least 8 characters')
+            return
+        }
+
+        setLoading(true)
         try {
-            const response = await authService.login({ username, password })
-            localStorage.setItem('token', response.data.token)
+            await authService.register({ username, password })
+            const res = await authService.login({ username, password })
+            localStorage.setItem('token', res.data.token)
             navigate('/dashboard')
         } catch {
-            setError('Invalid username or password')
+            setError('Username already taken or registration failed')
         } finally {
             setLoading(false)
         }
@@ -32,8 +43,8 @@ export default function Login() {
             <div className={styles.card}>
                 <div className={styles.header}>
                     <span className={styles.icon}>📖</span>
-                    <h1 className={styles.title}>Library Manager</h1>
-                    <p className={styles.subtitle}>Sign in to your account</p>
+                    <h1 className={styles.title}>Create account</h1>
+                    <p className={styles.subtitle}>Set up your classroom library</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -45,8 +56,8 @@ export default function Login() {
                             type="text"
                             className={styles.input}
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Enter your username"
+                            onChange={e => setUsername(e.target.value)}
+                            placeholder="Choose a username"
                             required
                         />
                     </div>
@@ -57,8 +68,20 @@ export default function Login() {
                             type="password"
                             className={styles.input}
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Enter your password"
+                            onChange={e => setPassword(e.target.value)}
+                            placeholder="At least 8 characters"
+                            required
+                        />
+                    </div>
+
+                    <div className={styles.field}>
+                        <label className={styles.label}>Confirm password</label>
+                        <input
+                            type="password"
+                            className={styles.input}
+                            value={confirm}
+                            onChange={e => setConfirm(e.target.value)}
+                            placeholder="Repeat your password"
                             required
                         />
                     </div>
@@ -68,10 +91,11 @@ export default function Login() {
                         className={styles.button}
                         disabled={loading}
                     >
-                        {loading ? 'Signing in...' : 'Sign in'}
+                        {loading ? 'Creating account...' : 'Create account'}
                     </button>
+
                     <p className={styles.loginLink}>
-                        Don't have an account? <Link to="/register">Create one</Link>
+                        Already have an account? <Link to="/login">Sign in</Link>
                     </p>
                 </form>
             </div>

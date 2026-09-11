@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import Books from './pages/Books/Books'
 import Students from './pages/Students/Students'
 import Loans from './pages/Loans/Loans'
+import Register from './pages/Register/Register'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                     <Route path="books" element={<Books />} />
                     <Route path="loans" element={<Loans />} />
                     <Route path="students" element={<Students />} />
+                    <Route path="/register" element={<Register />} />
                 </Route>
             </Routes>
         </BrowserRouter>
