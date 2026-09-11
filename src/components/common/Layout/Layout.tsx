@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { authService } from '../../../services/authService'
 import styles from './Layout.module.scss'
 
 const navItems = [
@@ -8,7 +9,26 @@ const navItems = [
     { path: '/students', label: 'Students', icon: '👤' },
 ]
 
+function getUsername(): string {
+    try {
+        const token = localStorage.getItem('token')
+        if (!token) return ''
+        const payload = JSON.parse(atob(token.split('.')[1]))
+        return payload.sub || ''
+    } catch {
+        return ''
+    }
+}
+
 export default function Layout() {
+    const navigate = useNavigate()
+    const username = getUsername()
+
+    const handleLogout = () => {
+        authService.logout()
+        navigate('/login')
+    }
+
     return (
         <div className={styles.layout}>
             <aside className={styles.sidebar}>
@@ -30,6 +50,17 @@ export default function Layout() {
                         </NavLink>
                     ))}
                 </nav>
+                <div className={styles.userSection}>
+                    <div className={styles.userInfo}>
+                        <div className={styles.avatar}>
+                            {username.charAt(0).toUpperCase()}
+                        </div>
+                        <span className={styles.username}>{username}</span>
+                    </div>
+                    <button className={styles.logoutBtn} onClick={handleLogout}>
+                        Sign out
+                    </button>
+                </div>
             </aside>
             <main className={styles.main}>
                 <Outlet />

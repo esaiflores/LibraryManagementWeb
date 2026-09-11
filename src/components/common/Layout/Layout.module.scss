@@ -78,3 +78,57 @@
   padding: $space-8;
   min-height: 100vh;
 }
+
+.userSection {
+  margin-top: auto;
+  padding: $space-4;
+  border-top: 1px solid $color-border-light;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-bottom: $space-3;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $color-primary-light;
+  color: $color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  flex-shrink: 0;
+}
+
+.username {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logoutBtn {
+  width: 100%;
+  height: 36px;
+  background: none;
+  border: 1px solid $color-border-light;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    background: $color-danger-light;
+    color: $color-danger;
+    border-color: $color-danger-light;
+  }
+}
