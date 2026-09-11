@@ -1,0 +1,125 @@
+@use '../../styles/tokens' as *;
+
+.page {
+  max-width: 1200px;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  margin-bottom: $space-6;
+}
+
+.loading {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-4;
+  margin-bottom: $space-8;
+}
+
+.statCard {
+  background: $color-white;
+  border-radius: $border-radius-lg;
+  padding: $space-6;
+  border: 1px solid $color-border-light;
+}
+
+.statLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: $space-2;
+}
+
+.statValue {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-semibold;
+
+  &.blue { color: $color-primary; }
+  &.green { color: $color-success; }
+  &.amber { color: $color-warning; }
+  &.red { color: $color-danger; }
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+  margin-bottom: $space-8;
+}
+
+.chartCard {
+  background: $color-white;
+  border-radius: $border-radius-lg;
+  padding: $space-6;
+  border: 1px solid $color-border-light;
+}
+
+.chartTitle {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $space-4;
+  color: $color-text-primary;
+}
+
+.section {
+  background: $color-white;
+  border-radius: $border-radius-lg;
+  padding: $space-6;
+  border: 1px solid $color-border-light;
+}
+
+.sectionTitle {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $space-4;
+}
+
+.empty {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.loanList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.loanRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $space-3 $space-4;
+  background: $color-bg-secondary;
+  border-radius: $border-radius-md;
+}
+
+.loanInfo {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.loanBook {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.loanStudent {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+}
+
+.loanDue {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+
+  &.overdue {
+    color: $color-danger;
+    font-weight: $font-weight-medium;
+  }
+}
