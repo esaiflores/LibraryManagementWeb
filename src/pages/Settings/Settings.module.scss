@@ -1,0 +1,145 @@
+@use '../../styles/tokens' as *;
+
+.page {
+  max-width: 680px;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  margin-bottom: $space-8;
+}
+
+.loading {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+}
+
+.section {
+  background: $color-white;
+  border: 1px solid $color-border-light;
+  border-radius: $border-radius-lg;
+  padding: $space-6;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $space-1;
+}
+
+.sectionDesc {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: $space-5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+  }
+
+  input {
+    height: 40px;
+    padding: 0 $space-4;
+    border: 1px solid $color-border-light;
+    border-radius: $border-radius-md;
+    font-size: $font-size-sm;
+    outline: none;
+    width: 100%;
+
+    &:focus { border-color: $color-primary; }
+  }
+}
+
+.disabled {
+  background: $color-bg-secondary !important;
+  color: $color-text-tertiary !important;
+  cursor: not-allowed;
+}
+
+.hint {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.loanDaysWrapper {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.loanDaysInput {
+  width: 100px !important;
+}
+
+.loanDaysLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input { padding-right: 2.5rem; }
+}
+
+.togglePassword {
+  position: absolute;
+  right: $space-3;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
+
+.saveBtn {
+  height: 40px;
+  padding: 0 $space-6;
+  background: $color-primary;
+  color: $color-white;
+  border: none;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  align-self: flex-start;
+  transition: background 0.15s;
+
+  &:hover { background: $color-primary-dark; }
+}
+
+.success {
+  background: $color-success-light;
+  color: $color-success;
+  padding: $space-3 $space-4;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+}
+
+.error {
+  background: $color-danger-light;
+  color: $color-danger;
+  padding: $space-3 $space-4;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+}

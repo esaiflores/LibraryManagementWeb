@@ -7,6 +7,7 @@ const navItems = [
     { path: '/books', label: 'Books', icon: '📚' },
     { path: '/loans', label: 'Loans', icon: '📋' },
     { path: '/students', label: 'Students', icon: '👤' },
+    { path: '/settings', label: 'Settings', icon: '⚙️' },
 ]
 
 function getUsername(): string {
