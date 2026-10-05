@@ -6,7 +6,8 @@ interface Props {
 }
 
 export default function ProtectedRoute({ children }: Props) {
-    if (!authService.isAuthenticated()) {
+    if (!authService.isAuthenticated() || authService.isTokenExpired()) {
+        authService.logout()
         return <Navigate to="/login" replace />
     }
     return <>{children}</>

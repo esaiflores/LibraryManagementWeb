@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import api from '../../services/api'
 import styles from './Settings.module.scss'
+import { useNavigate } from 'react-router-dom'
+import { authService } from '../../services/authService'
 
 export default function Settings() {
     const [profile, setProfile] = useState({ username: '', email: '', displayName: '' })
@@ -17,6 +19,13 @@ export default function Settings() {
     useEffect(() => {
         fetchProfile()
     }, [])
+
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        authService.logout()
+        navigate('/login')
+    }
 
     const fetchProfile = async () => {
         try {
@@ -205,6 +214,14 @@ export default function Settings() {
                         </div>
                         <button type="submit" className={styles.saveBtn}>Change password</button>
                     </form>
+                </div>
+
+                <div className={styles.section}>
+                    <h3 className={styles.sectionTitle}>Account</h3>
+                    <p className={styles.sectionDesc}>Signed in as <strong>{profile.username}</strong></p>
+                    <button className={styles.logoutBtn} onClick={handleLogout}>
+                        Sign out
+                    </button>
                 </div>
 
             </div>

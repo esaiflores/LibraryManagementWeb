@@ -1,6 +1,8 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { authService } from '../../../services/authService'
 import styles from './Layout.module.scss'
+import { useAutoLogout } from '../../../hooks/useAutoLogout'
+
 
 const navItems = [
     { path: '/dashboard', label: 'Dashboard', icon: '▦' },
@@ -22,6 +24,7 @@ function getUsername(): string {
 }
 
 export default function Layout() {
+    useAutoLogout()
     const navigate = useNavigate()
     const username = getUsername()
 

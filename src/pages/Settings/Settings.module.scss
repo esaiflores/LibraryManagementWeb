@@ -143,3 +143,21 @@
   border-radius: $border-radius-md;
   font-size: $font-size-sm;
 }
+
+.logoutBtn {
+  height: 40px;
+  padding: 0 $space-6;
+  background: none;
+  border: 1px solid $color-border-light;
+  border-radius: $border-radius-md;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    background: $color-danger-light;
+    color: $color-danger;
+    border-color: $color-danger-light;
+  }
+}
