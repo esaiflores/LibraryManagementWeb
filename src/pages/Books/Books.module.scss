@@ -338,3 +338,35 @@
   border-radius: 2px;
   flex-shrink: 0;
 }
+
+@media (max-width: $breakpoint-md) {
+  .tableHeader {
+    display: none;
+  }
+
+  .table {
+    border: none;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    gap: $space-3;
+  }
+
+  .tableRow {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    padding: $space-4;
+    background: $color-white;
+    border: 1px solid $color-border-light;
+    border-radius: $border-radius-lg;
+  }
+
+  .bookTitleCell {
+    font-size: $font-size-base;
+  }
+
+  .actions {
+    margin-top: $space-2;
+  }
+}
